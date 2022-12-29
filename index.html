@@ -56,9 +56,9 @@
       <div class="col-lg-9 pb-3">
 
         <!-- today forecast tile -->
-        <section id="todayTitle" class="row mt-3" role="region" aria-live="polite">
+        <section class="row mt-3" role="region" aria-live="polite">
           <nav class="navbar navbar-light bg-light" style="width: 55rem;">
-            <span class="navbar-brand mb-0 h1">Navbar</span>
+            <span class="navbar-brand mb-0 h1" id="todayTitle">Navbar</span>
           </nav>
         </section>
 
@@ -67,6 +67,7 @@
           <div class="card" style="width: 55rem;">
             <div class="card-body" id="todayForecast">
               <h5 class="card-title" id="todayDate">Special title treatment</h5>
+              <h6 class="card-subtitle mb-2 text-muted"><img id="todayIcon" src="" alt="Weather icon"></h6>
               <h7 class="card-text" id="todayTemp">Temp:</h7></br>
               <h7 class="card-text" id="todayWind">Wind:</h7></br>
               <h7 class="card-text" id="todayHumidity">Humidity:</h7></br>
@@ -81,14 +82,14 @@
           </nav>
         </section>
 
-        <!-- five days forecast cards -->
+        <!-- five day forecast cards -->
         <section id="forecast" class="row mt-3" role="region" aria-live="polite">
 
           <!-- Day 1 forecast -->
           <div class="card" style="width: 11rem;">
             <div class="card-body">
               <h5 class="card-title" id="day1date">Card title</h5>
-              <h6 class="card-subtitle mb-2 text-muted" id="day1icon">Card subtitle</h6>
+              <h6 class="card-subtitle mb-2 text-muted"><img id="day1icon" src="" alt="Weather icon"></h6>              
               <h7 class="card-text" id="day1temp">Temp:</h7></br>
               <h7 class="card-text" id="day1wind">Wind:</h7></br>
               <h7 class="card-text" id="day1humidity">Humidity:</h7></br>
@@ -178,7 +179,7 @@
 
   <!-- Moment.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
-  
+
   <!-- jQuery -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
