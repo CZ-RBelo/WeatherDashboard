@@ -5,9 +5,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <link rel="stylesheet" href="styles/reset.css" />
+  <!-- CSS -->
+  <link rel="stylesheet" href="./assets/css/style.css" />
+  <!-- Bootstrap -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+  <!-- Cloudflare CSS icons-->  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+
+
   <title>Weather Dashboard</title>
 </head>
 
@@ -19,10 +26,14 @@
   <!-- max-width for ultra wide resolutions -->
   <div class="container-fluid" style="max-width: 1400px">
     <div class="row">
+
+      <!-- html aside element to present the Search for a City input form and save the searched city on local storage  -->
       <aside class="col-lg-3 pb-3">
         <h2 id="form-heading" class="mt-1 h3 form-label">
           Search for a City:
         </h2>
+
+        <!-- Search form -->
         <form id="search-form" class="form">
           <div class="form-inline form-group">
             <div class="input-group">
@@ -37,21 +48,148 @@
             </div>
           </div>
         </form>
+
+        <!-- Search list cities' history -->
         <div class="list-group" id="history"></div>
       </aside>
 
       <div class="col-lg-9 pb-3">
-        <section id="today" class="mt-3" role="region" aria-live="polite"></section>
-        <section id="forecast" class="row mt-3" role="region" aria-live="polite"></section>
+
+        <!-- today forecast tile -->
+        <section id="todayTitle" class="row mt-3" role="region" aria-live="polite">
+          <nav class="navbar navbar-light bg-light" style="width: 55rem;">
+            <span class="navbar-brand mb-0 h1">Navbar</span>
+          </nav>
+        </section>
+
+        <!-- today forecast card -->
+        <section id="today" class="row mt-3" role="region" aria-live="polite">
+          <div class="card" style="width: 55rem;">
+            <div class="card-body" id="todayForecast">
+              <h5 class="card-title" id="todayDate">Special title treatment</h5>
+              <h7 class="card-text" id="todayTemp">Temp:</h7></br>
+              <h7 class="card-text" id="todayWind">Wind:</h7></br>
+              <h7 class="card-text" id="todayHumidity">Humidity:</h7></br>
+            </div>
+          </div>
+        </section>
+
+        <!-- five day forecast tile -->
+        <section id="fiveDayForecast" class="row mt-3" role="region" aria-live="polite">
+          <nav class="navbar navbar-light bg-light" style="width: 55rem;">
+            <span class="navbar-brand mb-0 h1">Five day forecast</span>
+          </nav>
+        </section>
+
+        <!-- five days forecast cards -->
+        <section id="forecast" class="row mt-3" role="region" aria-live="polite">
+
+          <!-- Day 1 forecast -->
+          <div class="card" style="width: 11rem;">
+            <div class="card-body">
+              <h5 class="card-title" id="day1date">Card title</h5>
+              <h6 class="card-subtitle mb-2 text-muted" id="day1icon">Card subtitle</h6>
+              <h7 class="card-text" id="day1temp">Temp:</h7></br>
+              <h7 class="card-text" id="day1wind">Wind:</h7></br>
+              <h7 class="card-text" id="day1humidity">Humidity:</h7></br>
+            </div>
+          </div>
+
+          <!-- Day 2 forecast -->
+          <div class="card" style="width: 11rem;">
+            <div class="card-body">
+              <h5 class="card-title" id="day2date">Card title</h5>
+              <h6 class="card-subtitle mb-2 text-muted" id="day2icon">Card subtitle</h6>
+              <h7 class="card-text" id="day2temp">Temp:</h7></br>
+              <h7 class="card-text" id="day2wind">Wind:</h7></br>
+              <h7 class="card-text" id="day2humidity">Humidity:</h7></br>
+            </div>
+          </div>
+
+          <!-- Day 3 forecast -->
+          <div class="card" style="width: 11rem;">
+            <div class="card-body">
+              <h5 class="card-title" id="day3date">Card title</h5>
+              <h6 class="card-subtitle mb-2 text-muted" id="day3icon">Card subtitle</h6>
+              <h7 class="card-text" id="day3temp">Temp:</h7></br>
+              <h7 class="card-text" id="day3wind">Wind:</h7></br>
+              <h7 class="card-text" id="day3humidity">Humidity:</h7></br>
+            </div>
+          </div>
+
+          <!-- Day 4 forecast -->
+          <div class="card" style="width: 11rem;">
+            <div class="card-body">
+              <h5 class="card-title" id="day4date">Card title</h5>
+              <h6 class="card-subtitle mb-2 text-muted" id="day4icon">Card subtitle</h6>
+              <h7 class="card-text" id="day4temp">Temp:</h7></br>
+              <h7 class="card-text" id="day4wind">Wind:</h7></br>
+              <h7 class="card-text" id="day4humidity">Humidity:</h7></br>
+            </div>
+          </div>
+
+          <!-- Day 5 forecast -->
+          <div class="card" style="width: 11rem;">
+            <div class="card-body">
+              <h5 class="card-title" id="day5date">Card title</h5>
+              <h6 class="card-subtitle mb-2 text-muted" id="day5icon">Card subtitle</h6>
+              <h7 class="card-text" id="day5temp">Temp:</h7></br>
+              <h7 class="card-text" id="day5wind">Wind:</h7></br>
+              <h7 class="card-text" id="day5humidity">Humidity:</h7></br>
+            </div>
+          </div>
+        </section>
+
+        <!-- local news tile -->
+        <section id="LocalNewsTitle" class="row mt-3" role="region" aria-live="polite">
+          <nav class="navbar navbar-light bg-light" style="width: 55rem;">
+            <span class="navbar-brand mb-0 h1">Local news</span>
+          </nav>
+        </section>
+
+        <!-- local news card -->
+        <section id="LocalNewsCard" class="row mt-3" role="region" aria-live="polite">
+          <div class="card" style="width: 55rem;">
+            <div class="card-body">
+              <h5 class="card-title" id="LocalNewsCardTitle">Special title treatment</h5>
+              <p class="card-text" id="LocalNewsCardText">With supporting text below as a natural lead-in to additional
+                content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </section>
+
       </div>
     </div>
   </div>
 
+  <!-- Footer / Contact element  -->
+  <footer class="container-fluid text-center text-white bg-dark p-2 weather-header">
+    <div class="footer-basic">
+      <div class="social">
+        <a href="https://linkedin.com/in/ruibelo" target="_blank"><i class="icon ion-social-linkedin"></i></a>
+        <a href="https://github.com/CZ-RBelo/" target="_blank"><i class="icon ion-social-github"></i></a>
+        <a href="mailto:jr.belo@hotmail.com" target="_blank"><i class="icon ion-email"></i></a>
+        <a href="tel:+447546437241" target="_blank"><i class="icon ion-ios-telephone"></i></a>
+      </div>
+      <p class="copyright">Rui Belo © 2022 | Bootstrap 4</p>
+    </div>
+  </footer>
+
   <!-- Moment.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+  
   <!-- jQuery -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="script.js"></script>
-</body>
 
+  <!-- javaScript -->
+  <script src="./assets/js/script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+</body>
 </html>

@@ -1,20 +1,16 @@
-# Weather Dashboard
+## Weather Dashboard
 
 
-## Repository
+### Repository
 
-```md
 A web page that aims to help travellers to see the weather outlook, for multiple cities so can plan a trip accordingly.  
-```
 
 ## Description    
 
-```md
 A weather dashboard with form inputs allows user searches for a city, and they are presented with current and future conditions for that city and that city is added to the search history.    
 When a user clicks on a city in the search history they are again presented with current and future conditions for that city.
-```
 
-## Built with
+### Built with
 
 * HTML
 * CSS
@@ -25,14 +21,13 @@ When a user clicks on a city in the search history they are again presented with
 * FontAwesome
 * Google Fonts
 
-
-## Mock-Up
+### Mock-Up
 
 The images below illustrates the Weather Dashboard web page appearance:    
 
 
 
-## Contributing
+### Contributing
 
 Why you should contribute to an open-source project?  
 Contributing to open-source is a rewarding way to learn, teach, and build experience in just about any skill.
@@ -49,16 +44,16 @@ Ways you can contribute:
 >If you want to give feedback or report an issue, please create a [new GitHub issue](https://github.com/CZ-RBelo/WeatherDashboard/issues/new).  
 >**Please check if a topic about your issue already exists!**
 
-## Links
+### Links
 
 * [Github Repository](https://github.com/CZ-RBelo/WeatherDashboard)
 * [Deployed Application](https://cz-rbelo.github.io/WeatherDashboard)
 
-## Credits
+### Credits
 
 
 
-## Contacts
+### Contacts
 
 If you require any further information, feel free to contact me at:
  
@@ -67,6 +62,5 @@ If you require any further information, feel free to contact me at:
 * LinkedIn: [Rui Belo](https://linkedin.com/in/ruibelo)
 
 ---
-## License
-Licensed under the [MIT license](https://github.com/CZ-RBelo/WeatherDashboard/blob/main/LICENSE)
+### Licensed under the [MIT license](https://github.com/CZ-RBelo/WeatherDashboard/blob/main/LICENSE)
 
