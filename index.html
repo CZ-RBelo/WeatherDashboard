@@ -5,8 +5,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
   <!-- CSS -->
   <link rel="stylesheet" href="./assets/css/style.css" />
+
   <!-- Bootstrap -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -14,7 +16,7 @@
   <!-- Cloudflare CSS icons-->  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 
-
+  <!-- Page Title-->
   <title>Weather Dashboard</title>
 </head>
 
@@ -37,12 +39,9 @@
         <form id="search-form" class="form">
           <div class="form-inline form-group">
             <div class="input-group">
-              <input class="form-input weather-search" type="text" id="search-input" placeholder="London"
-                aria-labelledby="form-heading" aria-controls="today forecast" />
+              <input class="form-input weather-search" type="text" id="search-input" placeholder="London" aria-labelledby="form-heading" aria-controls="today forecast" />
               <div class="input-group-append">
-                <button type="submit" class="btn search-button" id="search-button" aria-label="submit search">
-                  Search
-                </button>
+                <button type="submit" class="btn btn-primary" id="search-button" aria-label="submit search">Search</button>
                 <hr class="hr weather-hr" />
               </div>
             </div>
@@ -64,13 +63,13 @@
 
         <!-- today forecast card -->
         <section id="today" class="row mt-3" role="region" aria-live="polite">
-          <div class="card" style="width: 55rem;">
+          <div class="card bg-light" style="width: 55rem;">            
             <div class="card-body" id="todayForecast">
               <h5 class="card-title" id="todayDate">Special title treatment</h5>
               <h6 class="card-subtitle mb-2 text-muted"><img id="todayIcon" src="" alt="Weather icon"></h6>
-              <h7 class="card-text" id="todayTemp">Temp:</h7></br>
-              <h7 class="card-text" id="todayWind">Wind:</h7></br>
-              <h7 class="card-text" id="todayHumidity">Humidity:</h7></br>
+              <h8 class="card-text" id="todayTemp">Temp:</h8></br>
+              <h8 class="card-text" id="todayWind">Wind:</h8></br>
+              <h8 class="card-text" id="todayHumidity">Humidity:</h8></br>
             </div>
           </div>
         </section>
@@ -84,9 +83,9 @@
 
         <!-- five day forecast cards -->
         <section id="forecast" class="row mt-3" role="region" aria-live="polite">
-
+            
           <!-- Day 1 forecast -->
-          <div class="card" style="width: 11rem;">
+          <div class="card bg-light" style="width: 11rem;">
             <div class="card-body">
               <h5 class="card-title" id="day1date">Card title</h5>
               <h6 class="card-subtitle mb-2 text-muted"><img id="day1icon" src="" alt="Weather icon"></h6>              
@@ -97,10 +96,10 @@
           </div>
 
           <!-- Day 2 forecast -->
-          <div class="card" style="width: 11rem;">
+          <div class="card bg-light" style="width: 11rem;">
             <div class="card-body">
               <h5 class="card-title" id="day2date">Card title</h5>
-              <h6 class="card-subtitle mb-2 text-muted" id="day2icon">Card subtitle</h6>
+              <h6 class="card-subtitle mb-2 text-muted"><img id="day2icon" src="" alt="Weather icon"></h6>
               <h7 class="card-text" id="day2temp">Temp:</h7></br>
               <h7 class="card-text" id="day2wind">Wind:</h7></br>
               <h7 class="card-text" id="day2humidity">Humidity:</h7></br>
@@ -108,10 +107,10 @@
           </div>
 
           <!-- Day 3 forecast -->
-          <div class="card" style="width: 11rem;">
+          <div class="card bg-light" style="width: 11rem;">
             <div class="card-body">
               <h5 class="card-title" id="day3date">Card title</h5>
-              <h6 class="card-subtitle mb-2 text-muted" id="day3icon">Card subtitle</h6>
+              <h6 class="card-subtitle mb-2 text-muted"><img id="day3icon" src="" alt="Weather icon"></h6>
               <h7 class="card-text" id="day3temp">Temp:</h7></br>
               <h7 class="card-text" id="day3wind">Wind:</h7></br>
               <h7 class="card-text" id="day3humidity">Humidity:</h7></br>
@@ -119,10 +118,10 @@
           </div>
 
           <!-- Day 4 forecast -->
-          <div class="card" style="width: 11rem;">
+          <div class="card bg-light" style="width: 11rem;">
             <div class="card-body">
               <h5 class="card-title" id="day4date">Card title</h5>
-              <h6 class="card-subtitle mb-2 text-muted" id="day4icon">Card subtitle</h6>
+              <h6 class="card-subtitle mb-2 text-muted"><img id="day4icon" src="" alt="Weather icon"></h6>
               <h7 class="card-text" id="day4temp">Temp:</h7></br>
               <h7 class="card-text" id="day4wind">Wind:</h7></br>
               <h7 class="card-text" id="day4humidity">Humidity:</h7></br>
@@ -130,10 +129,10 @@
           </div>
 
           <!-- Day 5 forecast -->
-          <div class="card" style="width: 11rem;">
+          <div class="card bg-light" style="width: 11rem;">
             <div class="card-body">
               <h5 class="card-title" id="day5date">Card title</h5>
-              <h6 class="card-subtitle mb-2 text-muted" id="day5icon">Card subtitle</h6>
+              <h6 class="card-subtitle mb-2 text-muted"><img id="day5icon" src="" alt="Weather icon"></h6>
               <h7 class="card-text" id="day5temp">Temp:</h7></br>
               <h7 class="card-text" id="day5wind">Wind:</h7></br>
               <h7 class="card-text" id="day5humidity">Humidity:</h7></br>
@@ -185,6 +184,7 @@
 
   <!-- javaScript -->
   <script src="./assets/js/script.js"></script>
+  <script src="./assets/js/config.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
     integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
     crossorigin="anonymous"></script>

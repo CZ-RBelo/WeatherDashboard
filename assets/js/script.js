@@ -1,66 +1,147 @@
-// This is our API key
-var APIKey = "9edb3bba8245d02c6ef9c27be0924a9d";
+// Weather API Key
+var WeatherAPIKey = config.WeatherAPI;
 
-// Here we are building the URL we need to query the database
-var queryURL = "https://api.openweathermap.org/data/2.5/forecast?lat=37.1289771&lon=-84.0832646&appid=" + APIKey;
+var WeatherqueryGEOlat;
+var WeatherqueryGEOlon;
 
+// .on("click") function associated with the Search Button
+$("#search-button").on("click", function(event) {
+    event.preventDefault(); 
 
-// Here we run our AJAX call to the OpenWeatherMap API
-$.ajax({
-  url: queryURL,
-  method: "GET"
-})
-  // We store all of the retrieved data inside of an object called "response"
-  .then(function(response) {
+    // Searched city
+    var city = $("#search-input")
+    .val()
+    .trim();
 
-    // Log the queryURL
-    console.log(queryURL);
+    // Geocoding API - to get the lat & lon from each city
+    var WeatherqueryGEO = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=0&appid=" + WeatherAPIKey;
+    fetch(WeatherqueryGEO)
 
-    // Log the resulting object
-    console.log(response);
+    // Convert the response into JSON
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (data) {
+        WeatherqueryGEOlon = data[0].lon;
+        WeatherqueryGEOlat = data[0].lat;
 
-    // Transfer content to HTML
+    // Weather query URL
+    var WeatherqueryURL = "https://api.openweathermap.org/data/2.5/forecast?lat=" + WeatherqueryGEOlat + "&lon=" + WeatherqueryGEOlon + "&appid=" + WeatherAPIKey;
 
-
-    // today forecast weather card
-
-        // Convert the temp to Celsius
-        var todayTemp = response.list[0].main.temp - 273.15;
-        // Get date
-        var todayDate = response.list[0].dt_txt 
-        // Weather icon        
-        var todayIcon = response.list[0].weather[0].icon        
-        var todayIconUrl = "http://openweathermap.org/img/w/" + todayIcon + ".png";
+    $.ajax({
+    url: WeatherqueryURL,
+    method: "GET"
+  })
+    .then(function(response) {
         
-
-        $("#todayTitle").text(response.city.name);
-        $("#todayDate").text(todayDate.substring(0, 10));
-        $("#todayIcon").attr('src', todayIconUrl);
-        $("#todayTemp").text("Temp: " + todayTemp.toFixed(2) + " °C");
-        $("#todayWind").text("Wind Speed: " + response.list[0].wind.speed + " KPH");
-        $("#todayHumidity").text("Humidity: " + response.list[0].main.humidity + " %");
-
-    // five day forecast cards
-
-    // Day 1 forecast
-
-        // Convert the temp to Celsius
-        var day1Temp = response.list[5].main.temp - 273.15;
-        // Get date
-        var day1date = response.list[5].dt_txt      
-        // Weather icon        
-        var day1icon = response.list[5].weather[0].icon        
-        var day1iconUrl = "http://openweathermap.org/img/w/" + day1icon + ".png";
-
-        $("#day1date").text(day1date.substring(0, 10));
-        $("#day1icon").attr('src', day1iconUrl);
-        $("#day1temp").text("Temp: " + day1Temp.toFixed(2) + " °C");
-        $("#day1wind").text("Wind Speed: " + response.list[5].wind.speed + " KPH");
-        $("#day1humidity").text("Humidity: " + response.list[5].main.humidity + " %");
-
-    // Log the data in the console as well
-    console.log("City name: " + response.city.name);
-    console.log("Wind Speed: " + response.list[0].wind.speed);
-    console.log("Humidity: " + response.list[0].main.humidity);
-    console.log("Temperature (C): " + todayTemp);
+      // Transfer content to HTML  
+  
+      // today forecast weather card
+  
+          // Convert the temp to Celsius
+          var todayTemp = response.list[0].main.temp - 273.15;
+          // Get date
+          var todayDate = response.list[0].dt_txt 
+          // Weather icon        
+          var todayIcon = response.list[0].weather[0].icon        
+          var todayIconUrl = "http://openweathermap.org/img/w/" + todayIcon + ".png";
+          
+  
+          $("#todayTitle").text(response.city.name);
+          $("#todayDate").text(todayDate.substring(0, 10));
+          $("#todayIcon").attr('src', todayIconUrl);
+          $("#todayTemp").text("Temp: " + todayTemp.toFixed(2) + " °C");
+          $("#todayWind").text("Wind Speed: " + response.list[0].wind.speed + " KPH");
+          $("#todayHumidity").text("Humidity: " + response.list[0].main.humidity + " %");
+  
+      // five day forecast cards
+  
+      // Day 1 forecast
+  
+          // Convert the temp to Celsius
+          var day1Temp = response.list[5].main.temp - 273.15;
+          // Get date
+          var day1date = response.list[5].dt_txt      
+          // Weather icon        
+          var day1icon = response.list[5].weather[0].icon        
+          var day1iconUrl = "http://openweathermap.org/img/w/" + day1icon + ".png";
+  
+          $("#day1date").text(day1date.substring(0, 10));
+          $("#day1icon").attr('src', day1iconUrl);
+          $("#day1temp").text("Temp: " + day1Temp.toFixed(2) + " °C");
+          $("#day1wind").text("Wind Speed: " + response.list[5].wind.speed + " KPH");
+          $("#day1humidity").text("Humidity: " + response.list[5].main.humidity + " %");
+  
+      // Day 2 forecast
+  
+          // Convert the temp to Celsius
+          var day2Temp = response.list[13].main.temp - 273.15;
+          // Get date
+          var day2date = response.list[13].dt_txt      
+          // Weather icon        
+          var day2icon = response.list[13].weather[0].icon        
+          var day2iconUrl = "http://openweathermap.org/img/w/" + day2icon + ".png";
+  
+          $("#day2date").text(day2date.substring(0, 10));
+          $("#day2icon").attr('src', day2iconUrl);
+          $("#day2temp").text("Temp: " + day2Temp.toFixed(2) + " °C");
+          $("#day2wind").text("Wind Speed: " + response.list[13].wind.speed + " KPH");
+          $("#day2humidity").text("Humidity: " + response.list[13].main.humidity + " %");
+  
+      // Day 3 forecast
+  
+          // Convert the temp to Celsius
+          var day3Temp = response.list[21].main.temp - 273.15;
+          // Get date
+          var day3date = response.list[21].dt_txt      
+          // Weather icon        
+          var day3icon = response.list[21].weather[0].icon        
+          var day3iconUrl = "http://openweathermap.org/img/w/" + day3icon + ".png";
+  
+          $("#day3date").text(day3date.substring(0, 10));
+          $("#day3icon").attr('src', day3iconUrl);
+          $("#day3temp").text("Temp: " + day3Temp.toFixed(2) + " °C");
+          $("#day3wind").text("Wind Speed: " + response.list[21].wind.speed + " KPH");
+          $("#day3humidity").text("Humidity: " + response.list[21].main.humidity + " %");
+  
+      // Day 4 forecast
+  
+          // Convert the temp to Celsius
+          var day4Temp = response.list[29].main.temp - 273.15;
+          // Get date
+          var day4date = response.list[29].dt_txt      
+          // Weather icon        
+          var day4icon = response.list[29].weather[0].icon        
+          var day4iconUrl = "http://openweathermap.org/img/w/" + day4icon + ".png";
+  
+          $("#day4date").text(day4date.substring(0, 10));
+          $("#day4icon").attr('src', day4iconUrl);
+          $("#day4temp").text("Temp: " + day4Temp.toFixed(2) + " °C");
+          $("#day4wind").text("Wind Speed: " + response.list[29].wind.speed + " KPH");
+          $("#day4humidity").text("Humidity: " + response.list[29].main.humidity + " %");
+  
+      // Day 5 forecast
+  
+          // Convert the temp to Celsius
+          var day5Temp = response.list[37].main.temp - 273.15;
+          // Get date
+          var day5date = response.list[37].dt_txt      
+          // Weather icon        
+          var day5icon = response.list[37].weather[0].icon        
+          var day5iconUrl = "http://openweathermap.org/img/w/" + day5icon + ".png";
+  
+          $("#day5date").text(day5date.substring(0, 10));
+          $("#day5icon").attr('src', day5iconUrl);
+          $("#day5temp").text("Temp: " + day5Temp.toFixed(2) + " °C");
+          $("#day5wind").text("Wind Speed: " + response.list[37].wind.speed + " KPH");
+          $("#day5humidity").text("Humidity: " + response.list[37].main.humidity + " %");
+  
+  
+      // Log the data in the console as well
+      console.log("City name: " + response.city.name);
+      console.log("Wind Speed: " + response.list[0].wind.speed);
+      console.log("Humidity: " + response.list[0].main.humidity);
+      console.log("Temperature (C): " + todayTemp);
+    });
   });
+});
