@@ -1,6 +1,9 @@
 
 // Weather API Key
 var WeatherAPIKey = config.WeatherAPI;
+var newsAPIKey = config.newsAPI;
+
+
 
 var pastSearchedCitiesEl = $('#history');
 
@@ -49,11 +52,10 @@ function getCityGEO(city) {
       WeatherqueryGEOlon = response[0].lon;
       WeatherqueryGEOlat = response[0].lat;
 
-      if (WeatherqueryGEOlon === "" || WeatherqueryGEOlat === "") 
-      {
+      if (WeatherqueryGEOlon === "" || WeatherqueryGEOlat === "") {
         // Display an alert for invalid city name
         document.getElementById('ms-alert').style.visibility = 'visible';
-      } else { 
+      } else {
         searchCity(WeatherqueryGEOlon, WeatherqueryGEOlat);
       };
     });
@@ -68,7 +70,10 @@ $("#search-button").on("click", function (event) {
     .trim();
 
   if (city != "") {
+    // Get geo coordinates from the search city
     getCityGEO(city);
+    // Get local news from the search city
+    searchCityNews(city);
 
     // Save into the local storage the searched city    
     saveSearch(city);
@@ -108,9 +113,14 @@ function displaySearchHistory() {
 };
 
 // .on("click") function associated with the Save Searches Button
-function savedSearch (event) {
+function savedSearch(event) {
   var element = event.target;
   city = element.textContent;
+
+  // Get geo coordinates from the search city
   getCityGEO(city);
+  // Get local news from the search city
+  searchCityNews(city);
+
 };
 pastSearchedCitiesEl.on("click", savedSearch);
