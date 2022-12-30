@@ -3,8 +3,6 @@
 var WeatherAPIKey = config.WeatherAPI;
 var newsAPIKey = config.newsAPI;
 
-
-
 var pastSearchedCitiesEl = $('#history');
 
 var WeatherqueryGEOlon;
@@ -49,14 +47,24 @@ function getCityGEO(city) {
     method: "GET"
   })
     .then(function (response) {
-      WeatherqueryGEOlon = response[0].lon;
-      WeatherqueryGEOlat = response[0].lat;
 
-      if (WeatherqueryGEOlon === "" || WeatherqueryGEOlat === "") {
+      // Check the response length
+      if (response.length === 0) {
         // Display an alert for invalid city name
         document.getElementById('ms-alert').style.visibility = 'visible';
       } else {
+
+        WeatherqueryGEOlon = response[0].lon;
+        WeatherqueryGEOlat = response[0].lat;
+
+        // Save into the local storage the searched city    
+        saveSearch(city);
+        // Display into the search history the new city
+        displaySearchHistory();
+        // Display the city forecast into HTML
         searchCity(WeatherqueryGEOlon, WeatherqueryGEOlat);
+        // Get local news from the search city
+        searchCityNews(city);
       };
     });
 };
@@ -69,17 +77,11 @@ $("#search-button").on("click", function (event) {
     .val()
     .trim();
 
+    $("#search-input").val('');
+
   if (city != "") {
     // Get geo coordinates from the search city
     getCityGEO(city);
-    // Get local news from the search city
-    searchCityNews(city);
-
-    // Save into the local storage the searched city    
-    saveSearch(city);
-    // Display into the search history the new city
-    displaySearchHistory();
-
   } else {
     // Display an alert for invalid city name
     document.getElementById('ms-alert').style.visibility = 'visible';
@@ -104,7 +106,7 @@ function displaySearchHistory() {
   historyEl.innerHTML = '';
   for (i = 0; i < searchedCities.length; i++) {
     var newBTN = document.createElement("button");
-    newBTN.classList.add("btn", "btn-primary", "my-2", "past-city");
+    newBTN.classList.add("btn", "btn-light", "my-2", "past-city");
     newBTN.setAttribute("style", "width: 100%");
     newBTN.setAttribute("id", "saved-search-bt");
     newBTN.textContent = `${searchedCities[i]}`;

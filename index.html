@@ -46,9 +46,9 @@
         <!-- Search form -->
         <form>
           <input class="form-control my-2 text-primary" type="text" placeholder="Enter City" id="search-input">
-          <button class="btn btn-primary my-2" style="width: 100%" type="submit" id="search-button">Search</button>
+          <button class="btn btn-secondary my-2" style="width: 100%" type="submit" id="search-button">Search</button>
         </form>
-        <button type="submit" class="btn btn-primary my-2" style="width: 100%" onclick="clearHistory()">Clear
+        <button type="submit" class="btn btn-warning my-2" style="width: 100%" onclick="clearHistory()">Clear
           history</button>
         <hr class="hr weather-hr" />
 
@@ -69,12 +69,12 @@
         <section id="today" class="row mt-3" role="region" aria-live="polite">
           <div class="card bg-light" style="width: 55rem;">
             <div class="card-body" id="todayForecast">
-              <h5 class="card-title" id="todayDate">Special title treatment</h5>
-              <h6 class="card-subtitle mb-2 text-muted"><img id="todayIcon" src="./assets/image/waiting.png" width="30"
-                  height="30" alt="Weather icon"></h6>
-              <h8 class="card-text" id="todayTemp">Temp:</h8></br>
-              <h8 class="card-text" id="todayWind">Wind:</h8></br>
-              <h8 class="card-text" id="todayHumidity">Humidity:</h8></br>
+              <h4 class="card-title" id="todayDate">Special title treatment</h4>
+              <h2 class="card-subtitle mb-2 text-muted"><img id="todayIcon" src="./assets/image/waiting.png" width="30"
+                  height="30" alt="Weather icon"></h2>
+              <h5>Temp: <span id="todayTemp" class="badge badge-dark"></span></h5></br>
+              <h5>Wind: <span id="todayWind" class="badge badge-dark"></span></h5></br>
+              <h5>Humidity: <span id="todayHumidity" class="badge badge-dark"></span></h5></br>
             </div>
           </div>
         </section>
@@ -95,9 +95,9 @@
               <h5 class="card-title" id="day1date">Card title</h5>
               <h6 class="card-subtitle mb-2 text-muted"><img id="day1icon" src="./assets/image/waiting.png" width="30"
                   height="30" alt="Weather icon"></h6>
-              <h7 class="card-text" id="day1temp">Temp:</h7></br>
-              <h7 class="card-text" id="day1wind">Wind:</h7></br>
-              <h7 class="card-text" id="day1humidity">Humidity:</h7></br>
+              <h7>Temp: <span id="day1temp" class="badge badge-secondary"></span></h7></br>
+              <h7>Wind: <span id="day1wind" class="badge badge-secondary"></span></h7></br>
+              <h7>Humidity: <span id="day1humidity" class="badge badge-secondary"></span></h7></br>
             </div>
           </div>
 
@@ -107,9 +107,9 @@
               <h5 class="card-title" id="day2date">Card title</h5>
               <h6 class="card-subtitle mb-2 text-muted"><img id="day2icon" src="./assets/image/waiting.png" width="30"
                   height="30" alt="Weather icon"></h6>
-              <h7 class="card-text" id="day2temp">Temp:</h7></br>
-              <h7 class="card-text" id="day2wind">Wind:</h7></br>
-              <h7 class="card-text" id="day2humidity">Humidity:</h7></br>
+                  <h7>Temp: <span id="day2temp" class="badge badge-secondary"></span></h7></br>
+                  <h7>Wind: <span id="day2wind" class="badge badge-secondary"></span></h7></br>
+                  <h7>Humidity: <span id="day2humidity" class="badge badge-secondary"></span></h7></br>
             </div>
           </div>
 
@@ -119,9 +119,9 @@
               <h5 class="card-title" id="day3date">Card title</h5>
               <h6 class="card-subtitle mb-2 text-muted"><img id="day3icon" src="./assets/image/waiting.png" width="30"
                   height="30" alt="Weather icon"></h6>
-              <h7 class="card-text" id="day3temp">Temp:</h7></br>
-              <h7 class="card-text" id="day3wind">Wind:</h7></br>
-              <h7 class="card-text" id="day3humidity">Humidity:</h7></br>
+                  <h7>Temp: <span id="day3temp" class="badge badge-secondary"></span></h7></br>
+                  <h7>Wind: <span id="day3wind" class="badge badge-secondary"></span></h7></br>
+                  <h7>Humidity: <span id="day3humidity" class="badge badge-secondary"></span></h7></br>
             </div>
           </div>
 
@@ -131,9 +131,9 @@
               <h5 class="card-title" id="day4date">Card title</h5>
               <h6 class="card-subtitle mb-2 text-muted"><img id="day4icon" src="./assets/image/waiting.png" width="30"
                   height="30" alt="Weather icon"></h6>
-              <h7 class="card-text" id="day4temp">Temp:</h7></br>
-              <h7 class="card-text" id="day4wind">Wind:</h7></br>
-              <h7 class="card-text" id="day4humidity">Humidity:</h7></br>
+                  <h7>Temp: <span id="day4temp" class="badge badge-secondary"></span></h7></br>
+                  <h7>Wind: <span id="day4wind" class="badge badge-secondary"></span></h7></br>
+                  <h7>Humidity: <span id="day4humidity" class="badge badge-secondary"></span></h7></br>
             </div>
           </div>
 
@@ -143,9 +143,9 @@
               <h5 class="card-title" id="day5date">Card title</h5>
               <h6 class="card-subtitle mb-2 text-muted"><img id="day5icon" src="./assets/image/waiting.png" width="30"
                   height="30" alt="Weather icon"></h6>
-              <h7 class="card-text" id="day5temp">Temp:</h7></br>
-              <h7 class="card-text" id="day5wind">Wind:</h7></br>
-              <h7 class="card-text" id="day5humidity">Humidity:</h7></br>
+                  <h7>Temp: <span id="day5temp" class="badge badge-secondary"></span></h7></br>
+                  <h7>Wind: <span id="day5wind" class="badge badge-secondary"></span></h7></br>
+                  <h7>Humidity: <span id="day5humidity" class="badge badge-secondary"></span></h7></br>
             </div>
           </div>
         </section>
@@ -158,17 +158,8 @@
         </section>
 
         <!-- local news card -->
-        <section id="LocalNewsCard" class="row mt-3" role="region" aria-live="polite">
-          <div class="card" style="width: 55rem;">
-            <div class="card-body" id="article-section">
-              <h5 class="card-title" id="LocalNewsCardTitle">Special title treatment</h5>
-              <p class="card-text" id="LocalNewsCardText">With supporting text below as a natural lead-in to additional
-                content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-        </section>
-
+        <div class="row mt-3" role="region" aria-live="polite" class="card" style="width: 55rem;" id="article-section">
+        </div>
       </div>
     </div>
   </div>

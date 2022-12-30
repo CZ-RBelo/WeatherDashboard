@@ -25,9 +25,9 @@ function searchCity(WeatherqueryGEOlon, WeatherqueryGEOlat) {
         $("#todayTitle").text(response.city.name);
         $("#todayDate").text(todayDate.substring(0, 10));
         $("#todayIcon").attr({ src: todayIconUrl, width: 60, height: 60 });
-        $("#todayTemp").text("Temp: " + todayTemp.toFixed(2) + " °C");
-        $("#todayWind").text("Wind Speed: " + response.list[0].wind.speed + " KPH");
-        $("#todayHumidity").text("Humidity: " + response.list[0].main.humidity + " %");
+        $("#todayTemp").text(todayTemp.toFixed(2) + " °C");
+        $("#todayWind").text(response.list[0].wind.speed + " KPH");
+        $("#todayHumidity").text(response.list[0].main.humidity + " %");
 
         // five day forecast cards
 
@@ -44,9 +44,9 @@ function searchCity(WeatherqueryGEOlon, WeatherqueryGEOlat) {
         // Display Day 1 forecast into HTML
         $("#day1date").text(day1date.substring(0, 10));
         $("#day1icon").attr({ src: day1iconUrl, width: 60, height: 60 });
-        $("#day1temp").text("Temp: " + day1Temp.toFixed(2) + " °C");
-        $("#day1wind").text("Wind Speed: " + response.list[5].wind.speed + " KPH");
-        $("#day1humidity").text("Humidity: " + response.list[5].main.humidity + " %");
+        $("#day1temp").text(day1Temp.toFixed(2) + " °C");
+        $("#day1wind").text(response.list[5].wind.speed + " KPH");
+        $("#day1humidity").text(response.list[5].main.humidity + " %");
 
         // Day 2 forecast
 
@@ -61,9 +61,9 @@ function searchCity(WeatherqueryGEOlon, WeatherqueryGEOlat) {
         // Display Day 2 forecast into HTML
         $("#day2date").text(day2date.substring(0, 10));
         $("#day2icon").attr({ src: day2iconUrl, width: 60, height: 60 });
-        $("#day2temp").text("Temp: " + day2Temp.toFixed(2) + " °C");
-        $("#day2wind").text("Wind Speed: " + response.list[13].wind.speed + " KPH");
-        $("#day2humidity").text("Humidity: " + response.list[13].main.humidity + " %");
+        $("#day2temp").text(day2Temp.toFixed(2) + " °C");
+        $("#day2wind").text(response.list[13].wind.speed + " KPH");
+        $("#day2humidity").text(response.list[13].main.humidity + " %");
 
         // Day 3 forecast
 
@@ -78,9 +78,9 @@ function searchCity(WeatherqueryGEOlon, WeatherqueryGEOlat) {
         // Display Day 3 forecast into HTML
         $("#day3date").text(day3date.substring(0, 10));
         $("#day3icon").attr({ src: day3iconUrl, width: 60, height: 60 });
-        $("#day3temp").text("Temp: " + day3Temp.toFixed(2) + " °C");
-        $("#day3wind").text("Wind Speed: " + response.list[21].wind.speed + " KPH");
-        $("#day3humidity").text("Humidity: " + response.list[21].main.humidity + " %");
+        $("#day3temp").text(day3Temp.toFixed(2) + " °C");
+        $("#day3wind").text(response.list[21].wind.speed + " KPH");
+        $("#day3humidity").text(response.list[21].main.humidity + " %");
 
         // Day 4 forecast
 
@@ -95,9 +95,9 @@ function searchCity(WeatherqueryGEOlon, WeatherqueryGEOlat) {
         // Display Day 4 forecast into HTML
         $("#day4date").text(day4date.substring(0, 10));
         $("#day4icon").attr({ src: day4iconUrl, width: 60, height: 60 });
-        $("#day4temp").text("Temp: " + day4Temp.toFixed(2) + " °C");
-        $("#day4wind").text("Wind Speed: " + response.list[29].wind.speed + " KPH");
-        $("#day4humidity").text("Humidity: " + response.list[29].main.humidity + " %");
+        $("#day4temp").text(day4Temp.toFixed(2) + " °C");
+        $("#day4wind").text(response.list[29].wind.speed + " KPH");
+        $("#day4humidity").text(response.list[29].main.humidity + " %");
 
         // Day 5 forecast
 
@@ -112,9 +112,9 @@ function searchCity(WeatherqueryGEOlon, WeatherqueryGEOlat) {
         // Display Day 5 forecast into HTML
         $("#day5date").text(day5date.substring(0, 10));
         $("#day5icon").attr({ src: day5iconUrl, width: 60, height: 60 });
-        $("#day5temp").text("Temp: " + day5Temp.toFixed(2) + " °C");
-        $("#day5wind").text("Wind Speed: " + response.list[37].wind.speed + " KPH");
-        $("#day5humidity").text("Humidity: " + response.list[37].main.humidity + " %");
+        $("#day5temp").text(day5Temp.toFixed(2) + " °C");
+        $("#day5wind").text(response.list[37].wind.speed + " KPH");
+        $("#day5humidity").text(response.list[37].main.humidity + " %");
 
       }); 
 };
