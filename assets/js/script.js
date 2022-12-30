@@ -1,147 +1,116 @@
+
 // Weather API Key
 var WeatherAPIKey = config.WeatherAPI;
 
-var WeatherqueryGEOlat;
+var pastSearchedCitiesEl = $('#history');
+
 var WeatherqueryGEOlon;
+var WeatherqueryGEOlat;
+var today = moment().format('YYYY/MM/DD')
+
+// Display initial data into the Weather dashboard
+$("#todayDate").text(today);
+$("#day1date").text(moment().add(1, 'd').format('YYYY/MM/DD'));
+$("#day2date").text(moment().add(2, 'd').format('YYYY/MM/DD'));
+$("#day3date").text(moment().add(3, 'd').format('YYYY/MM/DD'));
+$("#day4date").text(moment().add(4, 'd').format('YYYY/MM/DD'));
+$("#day5date").text(moment().add(5, 'd').format('YYYY/MM/DD'));
+
+// function to hide the invalid city name alert
+function alertClose() {
+  document.getElementById('ms-alert').style.visibility = 'hidden';
+}
+
+// clear the local storage and the searches history 
+function clearHistory() {
+  // if is visible then hide the invalid city name alert
+  alertClose()
+  // clear the local storage
+  localStorage.clear();
+  var historyEl = document.getElementById('history');
+  // clear the searches history 
+  historyEl.innerHTML = '';
+  return;
+}
+
+// Display search history function
+displaySearchHistory()
+
+function getCityGEO(city) {
+
+  // Geocoding API - to get the lat & lon from each city
+  var WeatherqueryGEO = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=0&appid=" + WeatherAPIKey;
+
+  var data = $.ajax({
+    url: WeatherqueryGEO,
+    method: "GET"
+  })
+    .then(function (response) {
+      WeatherqueryGEOlon = response[0].lon;
+      WeatherqueryGEOlat = response[0].lat;
+
+      if (WeatherqueryGEOlon === "" || WeatherqueryGEOlat === "") 
+      {
+        // Display an alert for invalid city name
+        document.getElementById('ms-alert').style.visibility = 'visible';
+      } else { 
+        searchCity(WeatherqueryGEOlon, WeatherqueryGEOlat);
+      };
+    });
+};
 
 // .on("click") function associated with the Search Button
-$("#search-button").on("click", function(event) {
-    event.preventDefault(); 
-
-    // Searched city
-    var city = $("#search-input")
+$("#search-button").on("click", function (event) {
+  event.preventDefault();
+  // Searched city
+  var city = $("#search-input")
     .val()
     .trim();
 
-    // Geocoding API - to get the lat & lon from each city
-    var WeatherqueryGEO = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=0&appid=" + WeatherAPIKey;
-    fetch(WeatherqueryGEO)
+  if (city != "") {
+    getCityGEO(city);
 
-    // Convert the response into JSON
-    .then(function (response) {
-        return response.json();
-    })
-    .then(function (data) {
-        WeatherqueryGEOlon = data[0].lon;
-        WeatherqueryGEOlat = data[0].lat;
+    // Save into the local storage the searched city    
+    saveSearch(city);
+    // Display into the search history the new city
+    displaySearchHistory();
 
-    // Weather query URL
-    var WeatherqueryURL = "https://api.openweathermap.org/data/2.5/forecast?lat=" + WeatherqueryGEOlat + "&lon=" + WeatherqueryGEOlon + "&appid=" + WeatherAPIKey;
+  } else {
+    // Display an alert for invalid city name
+    document.getElementById('ms-alert').style.visibility = 'visible';
+  };
 
-    $.ajax({
-    url: WeatherqueryURL,
-    method: "GET"
-  })
-    .then(function(response) {
-        
-      // Transfer content to HTML  
-  
-      // today forecast weather card
-  
-          // Convert the temp to Celsius
-          var todayTemp = response.list[0].main.temp - 273.15;
-          // Get date
-          var todayDate = response.list[0].dt_txt 
-          // Weather icon        
-          var todayIcon = response.list[0].weather[0].icon        
-          var todayIconUrl = "http://openweathermap.org/img/w/" + todayIcon + ".png";
-          
-  
-          $("#todayTitle").text(response.city.name);
-          $("#todayDate").text(todayDate.substring(0, 10));
-          $("#todayIcon").attr('src', todayIconUrl);
-          $("#todayTemp").text("Temp: " + todayTemp.toFixed(2) + " °C");
-          $("#todayWind").text("Wind Speed: " + response.list[0].wind.speed + " KPH");
-          $("#todayHumidity").text("Humidity: " + response.list[0].main.humidity + " %");
-  
-      // five day forecast cards
-  
-      // Day 1 forecast
-  
-          // Convert the temp to Celsius
-          var day1Temp = response.list[5].main.temp - 273.15;
-          // Get date
-          var day1date = response.list[5].dt_txt      
-          // Weather icon        
-          var day1icon = response.list[5].weather[0].icon        
-          var day1iconUrl = "http://openweathermap.org/img/w/" + day1icon + ".png";
-  
-          $("#day1date").text(day1date.substring(0, 10));
-          $("#day1icon").attr('src', day1iconUrl);
-          $("#day1temp").text("Temp: " + day1Temp.toFixed(2) + " °C");
-          $("#day1wind").text("Wind Speed: " + response.list[5].wind.speed + " KPH");
-          $("#day1humidity").text("Humidity: " + response.list[5].main.humidity + " %");
-  
-      // Day 2 forecast
-  
-          // Convert the temp to Celsius
-          var day2Temp = response.list[13].main.temp - 273.15;
-          // Get date
-          var day2date = response.list[13].dt_txt      
-          // Weather icon        
-          var day2icon = response.list[13].weather[0].icon        
-          var day2iconUrl = "http://openweathermap.org/img/w/" + day2icon + ".png";
-  
-          $("#day2date").text(day2date.substring(0, 10));
-          $("#day2icon").attr('src', day2iconUrl);
-          $("#day2temp").text("Temp: " + day2Temp.toFixed(2) + " °C");
-          $("#day2wind").text("Wind Speed: " + response.list[13].wind.speed + " KPH");
-          $("#day2humidity").text("Humidity: " + response.list[13].main.humidity + " %");
-  
-      // Day 3 forecast
-  
-          // Convert the temp to Celsius
-          var day3Temp = response.list[21].main.temp - 273.15;
-          // Get date
-          var day3date = response.list[21].dt_txt      
-          // Weather icon        
-          var day3icon = response.list[21].weather[0].icon        
-          var day3iconUrl = "http://openweathermap.org/img/w/" + day3icon + ".png";
-  
-          $("#day3date").text(day3date.substring(0, 10));
-          $("#day3icon").attr('src', day3iconUrl);
-          $("#day3temp").text("Temp: " + day3Temp.toFixed(2) + " °C");
-          $("#day3wind").text("Wind Speed: " + response.list[21].wind.speed + " KPH");
-          $("#day3humidity").text("Humidity: " + response.list[21].main.humidity + " %");
-  
-      // Day 4 forecast
-  
-          // Convert the temp to Celsius
-          var day4Temp = response.list[29].main.temp - 273.15;
-          // Get date
-          var day4date = response.list[29].dt_txt      
-          // Weather icon        
-          var day4icon = response.list[29].weather[0].icon        
-          var day4iconUrl = "http://openweathermap.org/img/w/" + day4icon + ".png";
-  
-          $("#day4date").text(day4date.substring(0, 10));
-          $("#day4icon").attr('src', day4iconUrl);
-          $("#day4temp").text("Temp: " + day4Temp.toFixed(2) + " °C");
-          $("#day4wind").text("Wind Speed: " + response.list[29].wind.speed + " KPH");
-          $("#day4humidity").text("Humidity: " + response.list[29].main.humidity + " %");
-  
-      // Day 5 forecast
-  
-          // Convert the temp to Celsius
-          var day5Temp = response.list[37].main.temp - 273.15;
-          // Get date
-          var day5date = response.list[37].dt_txt      
-          // Weather icon        
-          var day5icon = response.list[37].weather[0].icon        
-          var day5iconUrl = "http://openweathermap.org/img/w/" + day5icon + ".png";
-  
-          $("#day5date").text(day5date.substring(0, 10));
-          $("#day5icon").attr('src', day5iconUrl);
-          $("#day5temp").text("Temp: " + day5Temp.toFixed(2) + " °C");
-          $("#day5wind").text("Wind Speed: " + response.list[37].wind.speed + " KPH");
-          $("#day5humidity").text("Humidity: " + response.list[37].main.humidity + " %");
-  
-  
-      // Log the data in the console as well
-      console.log("City name: " + response.city.name);
-      console.log("Wind Speed: " + response.list[0].wind.speed);
-      console.log("Humidity: " + response.list[0].main.humidity);
-      console.log("Temperature (C): " + todayTemp);
-    });
-  });
 });
+
+// Save into the local storage the searched city
+function saveSearch(city) {
+  var storedCities = JSON.parse(localStorage.getItem("WeatherDashboard")) || [];
+  // check if the local storage includes the searched city and the number of saved cities
+  if (!storedCities.includes(city) && storedCities.length < 10) {
+    storedCities.push(city);
+    localStorage.setItem("WeatherDashboard", JSON.stringify(storedCities));
+  };
+};
+
+// Display search history function
+function displaySearchHistory() {
+  var searchedCities = JSON.parse(localStorage.getItem("WeatherDashboard")) || [];
+  var historyEl = document.getElementById('history');
+  historyEl.innerHTML = '';
+  for (i = 0; i < searchedCities.length; i++) {
+    var newBTN = document.createElement("button");
+    newBTN.classList.add("btn", "btn-primary", "my-2", "past-city");
+    newBTN.setAttribute("style", "width: 100%");
+    newBTN.setAttribute("id", "saved-search-bt");
+    newBTN.textContent = `${searchedCities[i]}`;
+    historyEl.appendChild(newBTN);
+  }
+};
+
+// .on("click") function associated with the Save Searches Button
+function savedSearch (event) {
+  var element = event.target;
+  city = element.textContent;
+  getCityGEO(city);
+};
+pastSearchedCitiesEl.on("click", savedSearch);

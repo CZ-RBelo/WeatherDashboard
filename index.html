@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 
-  <!-- Cloudflare CSS icons-->  
+  <!-- Cloudflare CSS icons-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 
   <!-- Page Title-->
@@ -35,18 +35,22 @@
           Search for a City:
         </h2>
 
+        <!-- Display an alert for invalid city name -->
+        <div class="alert alert-warning" role="alert" id="ms-alert" style="visibility: hidden;">
+          Please enter a valid city name.
+          <button type="button" class="close" onclick="alertClose()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
         <!-- Search form -->
-        <form id="search-form" class="form">
-          <div class="form-inline form-group">
-            <div class="input-group">
-              <input class="form-input weather-search" type="text" id="search-input" placeholder="London" aria-labelledby="form-heading" aria-controls="today forecast" />
-              <div class="input-group-append">
-                <button type="submit" class="btn btn-primary" id="search-button" aria-label="submit search">Search</button>
-                <hr class="hr weather-hr" />
-              </div>
-            </div>
-          </div>
+        <form>
+          <input class="form-control my-2 text-primary" type="text" placeholder="Enter City" id="search-input">
+          <button class="btn btn-primary my-2" style="width: 100%" type="submit" id="search-button">Search</button>
         </form>
+        <button type="submit" class="btn btn-primary my-2" style="width: 100%" onclick="clearHistory()">Clear
+          history</button>
+        <hr class="hr weather-hr" />
 
         <!-- Search list cities' history -->
         <div class="list-group" id="history"></div>
@@ -57,16 +61,17 @@
         <!-- today forecast tile -->
         <section class="row mt-3" role="region" aria-live="polite">
           <nav class="navbar navbar-light bg-light" style="width: 55rem;">
-            <span class="navbar-brand mb-0 h1" id="todayTitle">Navbar</span>
+            <span class="navbar-brand mb-0 h1" id="todayTitle">City name</span>
           </nav>
         </section>
 
         <!-- today forecast card -->
         <section id="today" class="row mt-3" role="region" aria-live="polite">
-          <div class="card bg-light" style="width: 55rem;">            
+          <div class="card bg-light" style="width: 55rem;">
             <div class="card-body" id="todayForecast">
               <h5 class="card-title" id="todayDate">Special title treatment</h5>
-              <h6 class="card-subtitle mb-2 text-muted"><img id="todayIcon" src="" alt="Weather icon"></h6>
+              <h6 class="card-subtitle mb-2 text-muted"><img id="todayIcon" src="./assets/image/waiting.png" width="30"
+                  height="30" alt="Weather icon"></h6>
               <h8 class="card-text" id="todayTemp">Temp:</h8></br>
               <h8 class="card-text" id="todayWind">Wind:</h8></br>
               <h8 class="card-text" id="todayHumidity">Humidity:</h8></br>
@@ -83,12 +88,13 @@
 
         <!-- five day forecast cards -->
         <section id="forecast" class="row mt-3" role="region" aria-live="polite">
-            
+
           <!-- Day 1 forecast -->
           <div class="card bg-light" style="width: 11rem;">
             <div class="card-body">
               <h5 class="card-title" id="day1date">Card title</h5>
-              <h6 class="card-subtitle mb-2 text-muted"><img id="day1icon" src="" alt="Weather icon"></h6>              
+              <h6 class="card-subtitle mb-2 text-muted"><img id="day1icon" src="./assets/image/waiting.png" width="30"
+                  height="30" alt="Weather icon"></h6>
               <h7 class="card-text" id="day1temp">Temp:</h7></br>
               <h7 class="card-text" id="day1wind">Wind:</h7></br>
               <h7 class="card-text" id="day1humidity">Humidity:</h7></br>
@@ -99,7 +105,8 @@
           <div class="card bg-light" style="width: 11rem;">
             <div class="card-body">
               <h5 class="card-title" id="day2date">Card title</h5>
-              <h6 class="card-subtitle mb-2 text-muted"><img id="day2icon" src="" alt="Weather icon"></h6>
+              <h6 class="card-subtitle mb-2 text-muted"><img id="day2icon" src="./assets/image/waiting.png" width="30"
+                  height="30" alt="Weather icon"></h6>
               <h7 class="card-text" id="day2temp">Temp:</h7></br>
               <h7 class="card-text" id="day2wind">Wind:</h7></br>
               <h7 class="card-text" id="day2humidity">Humidity:</h7></br>
@@ -110,7 +117,8 @@
           <div class="card bg-light" style="width: 11rem;">
             <div class="card-body">
               <h5 class="card-title" id="day3date">Card title</h5>
-              <h6 class="card-subtitle mb-2 text-muted"><img id="day3icon" src="" alt="Weather icon"></h6>
+              <h6 class="card-subtitle mb-2 text-muted"><img id="day3icon" src="./assets/image/waiting.png" width="30"
+                  height="30" alt="Weather icon"></h6>
               <h7 class="card-text" id="day3temp">Temp:</h7></br>
               <h7 class="card-text" id="day3wind">Wind:</h7></br>
               <h7 class="card-text" id="day3humidity">Humidity:</h7></br>
@@ -121,7 +129,8 @@
           <div class="card bg-light" style="width: 11rem;">
             <div class="card-body">
               <h5 class="card-title" id="day4date">Card title</h5>
-              <h6 class="card-subtitle mb-2 text-muted"><img id="day4icon" src="" alt="Weather icon"></h6>
+              <h6 class="card-subtitle mb-2 text-muted"><img id="day4icon" src="./assets/image/waiting.png" width="30"
+                  height="30" alt="Weather icon"></h6>
               <h7 class="card-text" id="day4temp">Temp:</h7></br>
               <h7 class="card-text" id="day4wind">Wind:</h7></br>
               <h7 class="card-text" id="day4humidity">Humidity:</h7></br>
@@ -132,7 +141,8 @@
           <div class="card bg-light" style="width: 11rem;">
             <div class="card-body">
               <h5 class="card-title" id="day5date">Card title</h5>
-              <h6 class="card-subtitle mb-2 text-muted"><img id="day5icon" src="" alt="Weather icon"></h6>
+              <h6 class="card-subtitle mb-2 text-muted"><img id="day5icon" src="./assets/image/waiting.png" width="30"
+                  height="30" alt="Weather icon"></h6>
               <h7 class="card-text" id="day5temp">Temp:</h7></br>
               <h7 class="card-text" id="day5wind">Wind:</h7></br>
               <h7 class="card-text" id="day5humidity">Humidity:</h7></br>
@@ -172,6 +182,7 @@
         <a href="mailto:jr.belo@hotmail.com" target="_blank"><i class="icon ion-email"></i></a>
         <a href="tel:+447546437241" target="_blank"><i class="icon ion-ios-telephone"></i></a>
       </div>
+      <ion-icon name="pause-circle"></ion-icon>
       <p class="copyright">Rui Belo © 2022 | Bootstrap 4</p>
     </div>
   </footer>
@@ -184,6 +195,7 @@
 
   <!-- javaScript -->
   <script src="./assets/js/script.js"></script>
+  <script src="./assets/js/container-weather.js"></script>
   <script src="./assets/js/config.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
     integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
@@ -191,6 +203,6 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
-
 </body>
+
 </html>
