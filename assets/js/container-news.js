@@ -5,30 +5,28 @@ function searchCityNews(city) {
   var newsYear = moment().year() + "1231"
 
   // Function to empty out the articles
-  $("#article-section").empty();
+  $("#LocalNews").empty();
 
   /**
    * pulls information from the form and build the query URL
    * @returns {string} URL for NYT API based on form inputs
    */
   function buildQueryURL() {
-    // queryURL is the url we'll use to query the API
+
+    // Container News queryURL
     var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?";
 
-    // Begin building an object to contain our API call's query parameters
     // Set the API key
     var queryParams = { "api-key": newsAPIKey };
 
-    // Grab text the user typed into the search input, add to the queryParams object
+    // Search city
     queryParams.q = city
 
-    // If the user provides a startYear, include it in the queryParams object      
+    // Start Year     
     queryParams.begin_date = newsDay;
 
-    // If the user provides an endYear, include it in the queryParams object         
+    // Last day of the same year         
     queryParams.end_date = newsYear;
-
-
 
     return queryURL + $.param(queryParams);
   };
@@ -38,26 +36,22 @@ function searchCityNews(city) {
    * @param {object} NYTData - object containing NYT API data
    */
   function updatePage(NYTData) {
-    // Get from the form the number of results to display
-    // API doesn't have a "limit" parameter, so we have to do this ourselves
+
+    // Limit to five the number of results to display
     var numArticles = 5;
 
-    // Log the NYTData to console, where it will show up as an object
-    //console.log(NYTData);
-
-    // Loop through and build elements for the defined number of articles
+    // Loop Articles to display
     for (var i = 0; i < numArticles; i++) {
 
-      // Get specific article info for current index
+      // Get the article info
       var article = NYTData.response.docs[i];
 
       // Create the  list group to contain the articles and add the article content for each
-      var $articleList = $("<ul>");
-      $articleList.addClass("list-group");
+      var $articleList = $("<div class='card' style='width: 55rem;'>");
 
       // Add the newly created element to the DOM
-      $("#article-section").append($articleList);
-      var $articleListItem = $("<li class='list-group-item articleHeadline' style='width: 55rem;'>");
+      $("#LocalNews").append($articleList);
+      var $articleListItem = $("<div class='card-body' id='article-section'>");
 
       // Log published date, and append to document if exists
       var pubDate = article.pub_date;
@@ -72,40 +66,37 @@ function searchCityNews(city) {
         $articleListItem.append("<span class='badge badge-warning'>" + section + "</span> ");
       }
 
-      // If the article has a byline, log and append to $articleList
+      // Log byline, and append to document if exists
       var byline = article.byline;
       if (byline && byline.original) {
         $articleListItem.append("<span class='badge badge-success' align='right'>" + byline.original + "</span>");
       }
 
+      // Append to document a line break
       $articleListItem.append("<hr class='hr weather-hr' />");
 
-
-
-
-
-      // If the article has a headline, log and append to $articleList
+      // Log headline, and append to document if exists
       var headline = article.headline;
       if (headline && headline.main) {
         $articleListItem.append("<h5 class='card-title mark' id='day5date'> " + headline.main + "</h5>");
       };
 
+      // Log snippet, and append to document if exists
       var snippet = article.snippet;
       if (snippet) {
         $articleListItem.append("<h6 class='card-title' id='day5date'> " + snippet + "</h6>");
       };
 
+      // Log lead, and append to document if exists
       var lead = article.lead_paragraph;
       if (lead) {
         $articleListItem.append("<p class='card-title' id='day5date'> " + lead + "</p>");
       };
 
+      // Append to document a line break
       $articleListItem.append("<hr class='hr weather-hr' />");
 
-
-
-
-      // If the article has a byline, log and append to $articleList
+      // Log source, and append to document if exists
       var source = article.source;
       if (source) {
         $articleListItem.append("<span class='badge badge-success' align='right'>" + source + "</span></br>");
@@ -120,8 +111,6 @@ function searchCityNews(city) {
   }
   var queryURL = buildQueryURL();
 
-  // Make the AJAX request to the API - GETs the JSON data at the queryURL.
-  // The data then gets passed as an argument to the updatePage function
   $.ajax({
     url: queryURL,
     method: "GET"

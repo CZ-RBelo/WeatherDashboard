@@ -1,12 +1,11 @@
-
-// Weather API Key
-var WeatherAPIKey = config.WeatherAPI;
-var newsAPIKey = config.newsAPI;
-
-var pastSearchedCitiesEl = $('#history');
+// Weather & New API Keys
+const WeatherAPIKey = config.WeatherAPIKey;
+const newsAPIKey = config.newsAPIKey;
 
 var WeatherqueryGEOlon;
 var WeatherqueryGEOlat;
+
+var pastSearchedCitiesEl = $('#history');
 var today = moment().format('YYYY/MM/DD')
 
 // Display initial data into the Weather dashboard
@@ -77,7 +76,7 @@ $("#search-button").on("click", function (event) {
     .val()
     .trim();
 
-    $("#search-input").val('');
+  $("#search-input").val('');
 
   if (city != "") {
     // Get geo coordinates from the search city

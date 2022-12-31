@@ -45,7 +45,7 @@
 
         <!-- Search form -->
         <form>
-          <input class="form-control my-2 text-primary" type="text" placeholder="Enter City" id="search-input">
+          <input class="form-control text-secondary my-2" type="text" placeholder="Enter City" id="search-input">
           <button class="btn btn-secondary my-2" style="width: 100%" type="submit" id="search-button">Search</button>
         </form>
         <button type="submit" class="btn btn-warning my-2" style="width: 100%" onclick="clearHistory()">Clear
@@ -107,9 +107,9 @@
               <h5 class="card-title" id="day2date">Card title</h5>
               <h6 class="card-subtitle mb-2 text-muted"><img id="day2icon" src="./assets/image/waiting.png" width="30"
                   height="30" alt="Weather icon"></h6>
-                  <h7>Temp: <span id="day2temp" class="badge badge-secondary"></span></h7></br>
-                  <h7>Wind: <span id="day2wind" class="badge badge-secondary"></span></h7></br>
-                  <h7>Humidity: <span id="day2humidity" class="badge badge-secondary"></span></h7></br>
+              <h7>Temp: <span id="day2temp" class="badge badge-secondary"></span></h7></br>
+              <h7>Wind: <span id="day2wind" class="badge badge-secondary"></span></h7></br>
+              <h7>Humidity: <span id="day2humidity" class="badge badge-secondary"></span></h7></br>
             </div>
           </div>
 
@@ -119,9 +119,9 @@
               <h5 class="card-title" id="day3date">Card title</h5>
               <h6 class="card-subtitle mb-2 text-muted"><img id="day3icon" src="./assets/image/waiting.png" width="30"
                   height="30" alt="Weather icon"></h6>
-                  <h7>Temp: <span id="day3temp" class="badge badge-secondary"></span></h7></br>
-                  <h7>Wind: <span id="day3wind" class="badge badge-secondary"></span></h7></br>
-                  <h7>Humidity: <span id="day3humidity" class="badge badge-secondary"></span></h7></br>
+              <h7>Temp: <span id="day3temp" class="badge badge-secondary"></span></h7></br>
+              <h7>Wind: <span id="day3wind" class="badge badge-secondary"></span></h7></br>
+              <h7>Humidity: <span id="day3humidity" class="badge badge-secondary"></span></h7></br>
             </div>
           </div>
 
@@ -131,9 +131,9 @@
               <h5 class="card-title" id="day4date">Card title</h5>
               <h6 class="card-subtitle mb-2 text-muted"><img id="day4icon" src="./assets/image/waiting.png" width="30"
                   height="30" alt="Weather icon"></h6>
-                  <h7>Temp: <span id="day4temp" class="badge badge-secondary"></span></h7></br>
-                  <h7>Wind: <span id="day4wind" class="badge badge-secondary"></span></h7></br>
-                  <h7>Humidity: <span id="day4humidity" class="badge badge-secondary"></span></h7></br>
+              <h7>Temp: <span id="day4temp" class="badge badge-secondary"></span></h7></br>
+              <h7>Wind: <span id="day4wind" class="badge badge-secondary"></span></h7></br>
+              <h7>Humidity: <span id="day4humidity" class="badge badge-secondary"></span></h7></br>
             </div>
           </div>
 
@@ -143,9 +143,9 @@
               <h5 class="card-title" id="day5date">Card title</h5>
               <h6 class="card-subtitle mb-2 text-muted"><img id="day5icon" src="./assets/image/waiting.png" width="30"
                   height="30" alt="Weather icon"></h6>
-                  <h7>Temp: <span id="day5temp" class="badge badge-secondary"></span></h7></br>
-                  <h7>Wind: <span id="day5wind" class="badge badge-secondary"></span></h7></br>
-                  <h7>Humidity: <span id="day5humidity" class="badge badge-secondary"></span></h7></br>
+              <h7>Temp: <span id="day5temp" class="badge badge-secondary"></span></h7></br>
+              <h7>Wind: <span id="day5wind" class="badge badge-secondary"></span></h7></br>
+              <h7>Humidity: <span id="day5humidity" class="badge badge-secondary"></span></h7></br>
             </div>
           </div>
         </section>
@@ -158,8 +158,12 @@
         </section>
 
         <!-- local news card -->
-        <div class="row mt-3" role="region" aria-live="polite" class="card" style="width: 55rem;" id="article-section">
-        </div>
+        <section id="LocalNews" class="row mt-3" role="region" aria-live="polite">
+          <!-- <div class="card bg-light" style="width: 55rem;">
+            <div class="card-body" id="article-section">
+            </div>
+          </div> -->
+        </section>
       </div>
     </div>
   </div>
@@ -185,10 +189,10 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
   <!-- javaScript -->
+  <script src="./assets/js/config.js" type="text/javascript"></script>
+  <script src="./assets/js/container-weather.js" type="text/javascript"></script>
+  <script src="./assets/js/container-news.js" type="text/javascript"></script>
   <script src="./assets/js/script.js"></script>
-  <script src="./assets/js/container-weather.js"></script>
-  <script src="./assets/js/container-news.js"></script>
-  <script src="./assets/js/config.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
     integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
     crossorigin="anonymous"></script>
