@@ -3,11 +3,11 @@
 
 ### Repository
 
-A web page that aims to help travellers to see the weather outlook, for multiple cities so can plan a trip accordingly.  
+A web page that aims to help travellers to see the weather outlook and the local news, for multiple cities so can plan a trip accordingly.  
 
 ## Description    
 
-A weather dashboard with form inputs allows user searches for a city, and they are presented with current and future conditions for that city and that city is added to the search history.    
+A weather dashboard with form inputs allows user searches for a city, and they are presented with a maximum of 5 articles of local news and current and future weather forecast for that city and that city is added to the search history.    
 When a user clicks on a city in the search history they are again presented with current and future conditions for that city.
 
 ### Built with
@@ -51,7 +51,9 @@ Ways you can contribute:
 
 ### Credits
 
-
+* [The New York Times API](https://www.nytimes.com/)
+* [OpenWeather API](https://openweathermap.org/)
+* [Bootstrap](https://getbootstrap.com/)
 
 ### Contacts
 
