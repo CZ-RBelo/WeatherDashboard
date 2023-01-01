@@ -28,8 +28,8 @@ displaySearchHistory()
 function checkCity(city) {
 
   // Geocoding API - to get the lat & lon from each city
-  var WeatherqueryGEO = "https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=0&appid=" + WeatherAPIKey;
-
+  //var WeatherqueryGEO = "https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=0&appid=" + WeatherAPIKey;
+  var WeatherqueryGEO = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=metric&appid=" + WeatherAPIKey;
   $.ajax({
     url: WeatherqueryGEO,
     method: "GET"
