@@ -43,6 +43,14 @@ function searchCityNews(city) {
     // If there are no articles to show, remove the HTML title news
     if (numDocs == 0){
       $("#LocalNewsTitle").empty();
+    } else {
+      var LocalNewsTitle = $(`
+      <nav class="navbar navbar-light bg-light" style="width: 55rem;">
+      <span class="navbar-brand mb-0 h1">Local news</span>
+    </nav>
+    `);
+      // Append the HTML Card
+      $("#LocalNewsTitle").append(LocalNewsTitle);
     };
 
     // Limit to five the number of results to display

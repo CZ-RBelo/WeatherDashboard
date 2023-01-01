@@ -21,6 +21,7 @@
 </head>
 
 <body>
+  <!-- APP Title-->
   <header class="container-fluid text-center text-white bg-dark p-2 weather-header">
     <h1>Weather Dashboard</h1>
   </header>
@@ -59,32 +60,23 @@
       <div class="col-lg-9 pb-3">
 
         <!-- today forecast tile -->
-        <section class="row mt-3" role="region" aria-live="polite">
-          <nav class="navbar navbar-light bg-light" style="width: 55rem;">
-            <span class="navbar-brand mb-0 h1" id="todayTitle">City name</span>
-          </nav>
+        <section class="row mt-3" role="region" aria-live="polite" id="todayTitle">
         </section>
 
         <!-- today forecast card -->
-        <section id="today" class="row mt-3" role="region" aria-live="polite">          
+        <section id="today" class="row mt-3" role="region" aria-live="polite">
         </section>
 
         <!-- five day forecast tile -->
         <section id="fiveDayForecast" class="row mt-3" role="region" aria-live="polite">
-          <nav class="navbar navbar-light bg-light" style="width: 55rem;">
-            <span class="navbar-brand mb-0 h1">Five day forecast</span>
-          </nav>
         </section>
 
         <!-- five day forecast cards -->
         <section id="forecast" class="row mt-3" role="region" aria-live="polite">
-        </section>        
+        </section>
 
         <!-- local news tile -->
         <section id="LocalNewsTitle" class="row mt-3" role="region" aria-live="polite">
-          <nav class="navbar navbar-light bg-light" style="width: 55rem;">
-            <span class="navbar-brand mb-0 h1">Local news</span>
-          </nav>
         </section>
 
         <!-- local news card -->
@@ -115,7 +107,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
   <!-- javaScript -->
-  <script src="./assets/js/config.js" type="text/javascript"></script>
   <script src="./assets/js/container-weather.js" type="text/javascript"></script>
   <script src="./assets/js/container-news.js" type="text/javascript"></script>
   <script src="./assets/js/script.js"></script>
