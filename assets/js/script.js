@@ -1,8 +1,5 @@
 // Weather & New API Keys
 
-//const WeatherAPIKey = config.WeatherAPIKey;
-//const newsAPIKey = config.newsAPIKey;
-
 const WeatherAPIKey = "d1e2d0763204896fd894698f5c6e27ee";
 const newsAPIKey = "R1a31F4tBjCUaM2ho8GtIFsrSdtXt30M";
 
