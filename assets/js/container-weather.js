@@ -1,120 +1,74 @@
-function searchCity(WeatherqueryGEOlon, WeatherqueryGEOlat) {
+function searchCity(city) {
 
-  // Weather query URL
-  var WeatherqueryURL = "https://api.openweathermap.org/data/2.5/forecast?lat=" + WeatherqueryGEOlat + "&lon=" + WeatherqueryGEOlon + "&appid=" + WeatherAPIKey;
+  // Clear HTML current day forecast weather card element
+  $("#today").empty();
+
+  // // Clear HTML five day forecast weather cards element
+  $("#forecast").empty();  
+  
+  // Current day forecast weather query URL  
+  var currentDayURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=metric&appid=" + WeatherAPIKey;
 
   $.ajax({
-    url: WeatherqueryURL,
+    url: currentDayURL,
     method: "GET"
   })
     .then(function (response) {
 
-      // Transfer content to HTML  
+      /*
+      // Current day forecast weather card
+      */      
+      
+      $("#todayTitle").text(response.name);    
+      
+      // Build the html card
+      var currentCard = $(`
+      <div class="card bg-light" style="width: 55rem;">
+        <div class="card-body">
+        <h4 class="card-title">${moment().format('YYYY/MM/DD')}</h4>
+        <h2 class="card-subtitle mb-2 text-muted"><img src="https://openweathermap.org/img/w/${response.weather[0].icon}.png" alt="Weather icon"/></h2>
+          <h5>Temp: <span class="badge badge-secondary">${response.main.temp} °C</span></h5></br>
+          <h5>Wind: <span class="badge badge-secondary">${response.wind.speed} KPH</span></h5></br>
+          <h5>Humidity: <span class="badge badge-secondary">${response.main.humidity} %</span></h5></br>
+        </div>
+      </div>`);
 
-      // today forecast weather card
+      // Append the HTML Card
+      $("#today").append(currentCard);
 
-      // Convert the temp to Celsius
-      var todayTemp = response.list[0].main.temp - 273.15;
-      // Get date
-      var todayDate = response.list[0].dt_txt
-      // Weather icon        
-      var todayIcon = response.list[0].weather[0].icon
-      var todayIconUrl = "http://openweathermap.org/img/w/" + todayIcon + ".png";
+      /*
+      // Five day forecast cards
+      */
 
-      // Display current forecast into HTML
-      $("#todayTitle").text(response.city.name);
-      $("#todayDate").text(todayDate.substring(0, 10));
-      $("#todayIcon").attr({ src: todayIconUrl, width: 60, height: 60 });
-      $("#todayTemp").text(todayTemp.toFixed(2) + " °C");
-      $("#todayWind").text(response.list[0].wind.speed + " KPH");
-      $("#todayHumidity").text(response.list[0].main.humidity + " %");
+      // Geo coordinates to build the five days forecast weather query URL
+      var WeatherqueryGEOlon = response.coord.lon
+      var WeatherqueryGEOlat = response.coord.lat
 
-      // five day forecast cards
+      // Five days forecast weather query URL
+      var fiveDayURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + WeatherqueryGEOlat + "&lon=" + WeatherqueryGEOlon + "&units=metric&exclude=current,minutely,hourly,alerts&&appid=" + WeatherAPIKey;
 
-      // Day 1 forecast
+      $.ajax({
+        url: fiveDayURL,
+        method: "GET"
+      }).then(function (response) {
 
-      // Convert the temp to Celsius
-      var day1Temp = response.list[5].main.temp - 273.15;
-      // Get date
-      var day1date = response.list[5].dt_txt
-      // Weather icon        
-      var day1icon = response.list[5].weather[0].icon
-      var day1iconUrl = "http://openweathermap.org/img/w/" + day1icon + ".png";
+        // Build the html card of each day
+        for (let i = 1; i < 6; i++) {
+          var fiveDayCard = $(`
+          <div class="card bg-light" style="width: 11rem;">
+            <div class="card-body">
+              <h5 class="card-title">${moment.unix(response.daily[i].dt).format("YYYY/MM/DD")}</h5>
+              <h6 class="card-subtitle mb-2 text-muted"><img src="https://openweathermap.org/img/w/${response.daily[i].weather[0].icon}.png" alt="Weather icon"/></h6>
+              <h7>Temp: <span class="badge badge-secondary">${response.daily[i].temp.day} °C</span></h7></br>
+              <h7>Wind: <span class="badge badge-secondary">${response.daily[i].wind_speed} KPH</span></h7></br>
+              <h7>Humidity: <span class="badge badge-secondary">${response.daily[i].humidity} %</span></h7></br>
+            </div>
+          </div>`);
 
-      // Display Day 1 forecast into HTML
-      $("#day1date").text(day1date.substring(0, 10));
-      $("#day1icon").attr({ src: day1iconUrl, width: 60, height: 60 });
-      $("#day1temp").text(day1Temp.toFixed(2) + " °C");
-      $("#day1wind").text(response.list[5].wind.speed + " KPH");
-      $("#day1humidity").text(response.list[5].main.humidity + " %");
-
-      // Day 2 forecast
-
-      // Convert the temp to Celsius
-      var day2Temp = response.list[13].main.temp - 273.15;
-      // Get date
-      var day2date = response.list[13].dt_txt
-      // Weather icon        
-      var day2icon = response.list[13].weather[0].icon
-      var day2iconUrl = "http://openweathermap.org/img/w/" + day2icon + ".png";
-
-      // Display Day 2 forecast into HTML
-      $("#day2date").text(day2date.substring(0, 10));
-      $("#day2icon").attr({ src: day2iconUrl, width: 60, height: 60 });
-      $("#day2temp").text(day2Temp.toFixed(2) + " °C");
-      $("#day2wind").text(response.list[13].wind.speed + " KPH");
-      $("#day2humidity").text(response.list[13].main.humidity + " %");
-
-      // Day 3 forecast
-
-      // Convert the temp to Celsius
-      var day3Temp = response.list[21].main.temp - 273.15;
-      // Get date
-      var day3date = response.list[21].dt_txt
-      // Weather icon        
-      var day3icon = response.list[21].weather[0].icon
-      var day3iconUrl = "http://openweathermap.org/img/w/" + day3icon + ".png";
-
-      // Display Day 3 forecast into HTML
-      $("#day3date").text(day3date.substring(0, 10));
-      $("#day3icon").attr({ src: day3iconUrl, width: 60, height: 60 });
-      $("#day3temp").text(day3Temp.toFixed(2) + " °C");
-      $("#day3wind").text(response.list[21].wind.speed + " KPH");
-      $("#day3humidity").text(response.list[21].main.humidity + " %");
-
-      // Day 4 forecast
-
-      // Convert the temp to Celsius
-      var day4Temp = response.list[29].main.temp - 273.15;
-      // Get date
-      var day4date = response.list[29].dt_txt
-      // Weather icon        
-      var day4icon = response.list[29].weather[0].icon
-      var day4iconUrl = "http://openweathermap.org/img/w/" + day4icon + ".png";
-
-      // Display Day 4 forecast into HTML
-      $("#day4date").text(day4date.substring(0, 10));
-      $("#day4icon").attr({ src: day4iconUrl, width: 60, height: 60 });
-      $("#day4temp").text(day4Temp.toFixed(2) + " °C");
-      $("#day4wind").text(response.list[29].wind.speed + " KPH");
-      $("#day4humidity").text(response.list[29].main.humidity + " %");
-
-      // Day 5 forecast
-
-      // Convert the temp to Celsius
-      var day5Temp = response.list[37].main.temp - 273.15;
-      // Get date
-      var day5date = response.list[37].dt_txt
-      // Weather icon        
-      var day5icon = response.list[37].weather[0].icon
-      var day5iconUrl = "http://openweathermap.org/img/w/" + day5icon + ".png";
-
-      // Display Day 5 forecast into HTML
-      $("#day5date").text(day5date.substring(0, 10));
-      $("#day5icon").attr({ src: day5iconUrl, width: 60, height: 60 });
-      $("#day5temp").text(day5Temp.toFixed(2) + " °C");
-      $("#day5wind").text(response.list[37].wind.speed + " KPH");
-      $("#day5humidity").text(response.list[37].main.humidity + " %");
+          // Append the HTML Card for each day
+          $("#forecast").append(fiveDayCard);
+        };
+      });
 
     });
 };

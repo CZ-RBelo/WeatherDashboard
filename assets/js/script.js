@@ -1,25 +1,17 @@
 // Weather & New API Keys
-const WeatherAPIKey = config.WeatherAPIKey;
-const newsAPIKey = config.newsAPIKey;
 
-var WeatherqueryGEOlon;
-var WeatherqueryGEOlat;
+//const WeatherAPIKey = config.WeatherAPIKey;
+//const newsAPIKey = config.newsAPIKey;
+
+const WeatherAPIKey = "d1e2d0763204896fd894698f5c6e27ee";
+const newsAPIKey = "R1a31F4tBjCUaM2ho8GtIFsrSdtXt30M";
 
 var pastSearchedCitiesEl = $('#history');
-var today = moment().format('YYYY/MM/DD')
-
-// Display initial data into the Weather dashboard
-$("#todayDate").text(today);
-$("#day1date").text(moment().add(1, 'd').format('YYYY/MM/DD'));
-$("#day2date").text(moment().add(2, 'd').format('YYYY/MM/DD'));
-$("#day3date").text(moment().add(3, 'd').format('YYYY/MM/DD'));
-$("#day4date").text(moment().add(4, 'd').format('YYYY/MM/DD'));
-$("#day5date").text(moment().add(5, 'd').format('YYYY/MM/DD'));
 
 // function to hide the invalid city name alert
 function alertClose() {
   document.getElementById('ms-alert').style.visibility = 'hidden';
-}
+};
 
 // clear the local storage and the searches history 
 function clearHistory() {
@@ -36,12 +28,12 @@ function clearHistory() {
 // Display search history function
 displaySearchHistory()
 
-function getCityGEO(city) {
+function checkCity(city) {
 
   // Geocoding API - to get the lat & lon from each city
   var WeatherqueryGEO = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=0&appid=" + WeatherAPIKey;
 
-  var data = $.ajax({
+  $.ajax({
     url: WeatherqueryGEO,
     method: "GET"
   })
@@ -53,15 +45,12 @@ function getCityGEO(city) {
         document.getElementById('ms-alert').style.visibility = 'visible';
       } else {
 
-        WeatherqueryGEOlon = response[0].lon;
-        WeatherqueryGEOlat = response[0].lat;
-
         // Save into the local storage the searched city    
         saveSearch(city);
         // Display into the search history the new city
         displaySearchHistory();
         // Display the city forecast into HTML
-        searchCity(WeatherqueryGEOlon, WeatherqueryGEOlat);
+        searchCity(city);
         // Get local news from the search city
         searchCityNews(city);
       };
@@ -80,7 +69,7 @@ $("#search-button").on("click", function (event) {
 
   if (city != "") {
     // Get geo coordinates from the search city
-    getCityGEO(city);
+    checkCity(city);
   } else {
     // Display an alert for invalid city name
     document.getElementById('ms-alert').style.visibility = 'visible';
@@ -119,9 +108,7 @@ function savedSearch(event) {
   city = element.textContent;
 
   // Get geo coordinates from the search city
-  getCityGEO(city);
-  // Get local news from the search city
-  searchCityNews(city);
+  checkCity(city);
 
 };
 pastSearchedCitiesEl.on("click", savedSearch);

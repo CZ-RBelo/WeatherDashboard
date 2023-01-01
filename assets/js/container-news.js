@@ -37,76 +37,54 @@ function searchCityNews(city) {
    */
   function updatePage(NYTData) {
 
+    // Get number of articles
+    var numDocs = NYTData.response.docs.length
+
+    // If there are no articles to show, remove the HTML title news
+    if (numDocs == 0){
+      $("#LocalNewsTitle").empty();
+    };
+
     // Limit to five the number of results to display
-    var numArticles = 5;
+    if (numDocs > 5) {
+      var numArticles = 5;
+    } else {
+      var numArticles = numDocs
+    };
 
     // Loop Articles to display
     for (var i = 0; i < numArticles; i++) {
 
       // Get the article info
       var article = NYTData.response.docs[i];
-
-      // Create the  list group to contain the articles and add the article content for each
-      var $articleList = $("<div class='card' style='width: 55rem;'>");
-
-      // Add the newly created element to the DOM
-      $("#LocalNews").append($articleList);
-      var $articleListItem = $("<div class='card-body' id='article-section'>");
-
-      // Log published date, and append to document if exists
       var pubDate = article.pub_date;
-      let formatDate = pubDate.substr(0, 10);
-      if (pubDate) {
-        $articleListItem.append("<span class='badge badge-primary'>" + formatDate + "</span> ");
-      };
-
-      // Log section, and append to document if exists
+      let newDate = pubDate.toString();
       var section = article.section_name;
-      if (section) {
-        $articleListItem.append("<span class='badge badge-warning'>" + section + "</span> ");
-      }
-
-      // Log byline, and append to document if exists
       var byline = article.byline;
-      if (byline && byline.original) {
-        $articleListItem.append("<span class='badge badge-success' align='right'>" + byline.original + "</span>");
-      }
-
-      // Append to document a line break
-      $articleListItem.append("<hr class='hr weather-hr' />");
-
-      // Log headline, and append to document if exists
-      var headline = article.headline;
-      if (headline && headline.main) {
-        $articleListItem.append("<h5 class='card-title mark' id='day5date'> " + headline.main + "</h5>");
-      };
-
-      // Log snippet, and append to document if exists
       var snippet = article.snippet;
-      if (snippet) {
-        $articleListItem.append("<h6 class='card-title' id='day5date'> " + snippet + "</h6>");
-      };
-
-      // Log lead, and append to document if exists
+      var headline = article.headline;
       var lead = article.lead_paragraph;
-      if (lead) {
-        $articleListItem.append("<p class='card-title' id='day5date'> " + lead + "</p>");
-      };
-
-      // Append to document a line break
-      $articleListItem.append("<hr class='hr weather-hr' />");
-
-      // Log source, and append to document if exists
       var source = article.source;
-      if (source) {
-        $articleListItem.append("<span class='badge badge-success' align='right'>" + source + "</span></br>");
-      }
 
-      // Append and log url
-      $articleListItem.append("<a href='" + article.web_url + "'>" + article.web_url + "</a>");
+      // Build the html card
+      var futureCard = $(`
+      <div class="card" style="width: 55rem;">
+        <div class="card-body">
+          <span class="badge badge-primary">${newDate.substr(0, 10)} </span>
+          <span class="badge badge-warning">${section} </span>
+          <span class="badge badge-success">${byline.original} </span>
+          <hr class="hr weather-hr" />
+          <h5 class="card-title mark">${headline.main}</h5>
+          <h6 class="card-title">${snippet}</h6>
+          <p class="card-title">${lead}</p>
+          <hr class="hr weather-hr" />
+          <span class="badge badge-success" align="right">${source}</span></br>
+          <a href="${article.web_url}">${article.web_url}</a>
+        </div>
+      </div>`);
 
-      // Append the article
-      $articleList.append($articleListItem);
+      // Append the HTML Card
+      $("#LocalNews").append(futureCard);
     }
   }
   var queryURL = buildQueryURL();
